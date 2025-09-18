@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allowed IPs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/admin-common.css" />
+</head>
+<body>
+   <div style="width:100%;position:fixed;top:0;left:0;z-index:100;">
+      <%- include("adminHeader", { username: typeof username !== 'undefined' ? username : null }); %>
+    </div>
+  <div class="admin-section" style="display: flex; flex-direction: row; gap: 2.5rem; justify-content: center; align-items: flex-start; text-align: left;">
+    <!-- Left: Add IP Form -->
+    <div class="addip-form-col" style="flex: 1 1 260px; min-width: 220px; max-width: 350px;">
+      <h1>Allowed IPs</h1>
+      <% if (typeof message !== 'undefined' && message) { %>
+        <div class="success-message"><%= message %></div>
+      <% } %>
+      <form action="/addip" method="POST">
+        <input type="text" name="ipAddress" placeholder="Enter IP address" required>
+        <input type="text" name="name" placeholder="Enter name" required>
+        <button type="submit">Add IP</button>
+      </form>
+    </div>
+    <!-- Right: Added IPs List -->
+    <div class="addedips-list-col" style="flex: 1 1 260px; min-width: 220px; max-width: 350px;">
+      <h2>Added IPs</h2>
+      <% if (ips && ips.length > 0) { %>
+        <ul>
+          <% ips.forEach(function(ip) { %>
+            <li>
+              <span><b><%= ip.ipAddress %></b> - <%= ip.name %></span>
+              <form action="/addip/remove/<%= ip._id %>" method="POST" style="margin:0;display:inline;">
+                <button type="submit" style="background:#ff512f; color:#fff; border:none; border-radius:50%; width:28px; height:28px; font-size:1.1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 2px 6px 0 rgba(255,81,47,0.15);">&#10005;</button>
+              </form>
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <div style="color:#ffb347; text-align:center; margin-top:1.5rem;">No IPs added yet.</div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

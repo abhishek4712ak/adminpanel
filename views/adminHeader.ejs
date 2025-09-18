@@ -1,0 +1,205 @@
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/04fd96b6f4.js" crossorigin="anonymous"></script>
+
+<nav class="admin-navbar-dark">
+  <div class="admin-navbar-dark__container">
+    <!-- Brand -->
+    <div class="admin-navbar-dark__brand">
+      <i class="fas fa-user-shield"></i> Admin Panel
+    </div>
+
+    <!-- Toggle (for mobile) -->
+    <div class="admin-navbar-dark__toggle" onclick="toggleNavbarDark()">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Links -->
+    <div class="admin-navbar-dark__links" id="admin-navbar-dark-links">
+      <% if (username) { %>
+        <a href="/home" class="admin-navbar-dark__link home"><i class="fas fa-home"></i> Home</a>
+      <% } else { %>
+        <a href="/beforelogin" class="admin-navbar-dark__link home"><i class="fas fa-home"></i> Home</a>
+      <% } %>
+      <a href="/tyro" class="admin-navbar-dark__link tyro"><i class="fas fa-cogs"></i> Manage Tyro</a>
+      <a href="/register-role" class="admin-navbar-dark__link signup"><i class="fas fa-user-plus"></i> Register Roles</a>
+      <a href="/addEvents" class="admin-navbar-dark__link events"><i class="far fa-calendar-alt"></i> Manage Events</a>
+      <a href="/addip" class="admin-navbar-dark__link ip"><i class="fa-solid fa-laptop"></i> Allowed IPs</a>
+      <a href="/halt" class="admin-navbar-dark__link halt"><i class="fa-solid fa-stop-circle"></i> Halt Registration</a>
+      <% if (username) { %>
+        <a href="/logout" class="admin-navbar-dark__link logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+      <% } %>
+    </div>
+
+    <!-- User Info -->
+    <% if (username) { %>
+      <div class="admin-navbar-dark__user">
+        <i class="fas fa-user-circle"></i>
+        <span class="admin-navbar-dark__user-badge">
+          <%= username %>
+        </span>
+      </div>
+    <% } %>
+  </div>
+</nav>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  .admin-navbar-dark {
+    width: 100%;
+    background: linear-gradient(90deg, #181c2f 0%, #232946 100%);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    font-family: 'Poppins', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid #232946;
+  }
+  .admin-navbar-dark__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .admin-navbar-dark__brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+    padding: 0.4rem 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(255,81,47,0.08);
+  }
+  .admin-navbar-dark__links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    transition: max-height 0.3s;
+  }
+  .admin-navbar-dark__link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s;
+  }
+
+  /* Hover effects */
+  .admin-navbar-dark__link.home:hover {
+    background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+  }
+  .admin-navbar-dark__link.tyro:hover {
+    background: linear-gradient(90deg, #36d1c4 0%, #1e3c72 100%);
+  }
+  .admin-navbar-dark__link.signup:hover {
+    background: linear-gradient(90deg, #d70b0b 0%, #59df0c 100%);
+    color: #232946;
+  }
+  .admin-navbar-dark__link.events:hover {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+  }
+  .admin-navbar-dark__link.ip:hover {
+    background: linear-gradient(90deg, #8e2de2 0%, #4a00e0 100%);
+  }
+  .admin-navbar-dark__link.halt:hover {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%);
+  }
+  .admin-navbar-dark__link.logout:hover {
+    background: linear-gradient(90deg, #232526 0%, #ff512f 100%);
+  }
+
+  /* User info */
+  .admin-navbar-dark__user {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.05rem;
+    background: linear-gradient(90deg, #232526 0%, #414345 100%);
+    border-radius: 20px;
+    padding: 0.4rem 1rem 0.4rem 0.7rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    position: relative;
+    overflow: visible;
+  }
+
+  .admin-navbar-dark__user-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.25rem 1.1rem 0.25rem 1.1rem;
+    border-radius: 18px;
+    margin-left: 0.4rem;
+    box-shadow: 0 4px 16px 0 rgba(221,36,118,0.18), 0 1.5px 8px 0 rgba(255,81,47,0.10);
+    border: 2px solid #fff2;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    z-index: 2;
+  }
+  .admin-navbar-dark__user-badge:hover {
+    transform: scale(1.07) rotate(-2deg);
+    box-shadow: 0 8px 32px 0 rgba(221,36,118,0.25), 0 2px 12px 0 rgba(255,81,47,0.18);
+    cursor: pointer;
+  }
+
+  /* Mobile Responsive */
+  .admin-navbar-dark__toggle {
+    display: none;
+    color: #fff;
+    font-size: 1.7rem;
+    cursor: pointer;
+  }
+  @media (max-width: 900px) {
+    .admin-navbar-dark__container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .admin-navbar-dark__links {
+      width: 100%;
+      flex-direction: column;
+      display: none;
+    }
+    .admin-navbar-dark__links.active {
+      display: flex;
+    }
+    .admin-navbar-dark__toggle {
+      display: block;
+    }
+    .admin-navbar-dark__user {
+      margin-top: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  function toggleNavbarDark() {
+    const links = document.getElementById('admin-navbar-dark-links');
+    links.classList.toggle('active');
+  }
+
+  // Auto close navbar on mobile when clicking a link
+  document.querySelectorAll('.admin-navbar-dark__link').forEach(link => {
+    link.addEventListener('click', () => {
+      const links = document.getElementById('admin-navbar-dark-links');
+      links.classList.remove('active');
+    });
+  });
+</script>

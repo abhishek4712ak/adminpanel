@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ZEST2k25 Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #232946 0%, #181c2f 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .beforelogin-main {
+      margin-top: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2.5rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+    .beforelogin-info, .beforelogin-action {
+      background: rgba(30, 34, 54, 0.98);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      padding: 2.5rem 2rem 2rem 2rem;
+      min-width: 340px;
+      flex: 1;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .beforelogin-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffb347;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+    }
+    .beforelogin-info .zest-section {
+      background: linear-gradient(90deg, #232946 0%, #181c2f 100%);
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 1.2rem;
+      color: #ffb347;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 8px rgba(35,41,70,0.13);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .beforelogin-info .zest-section i {
+      font-size: 1.3rem;
+      color: #43cea2;
+    }
+    .beforelogin-action .zest-login-btn {
+      background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.95rem 2.4rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(255,81,47,0.13);
+      margin-top: 1.2rem;
+      z-index: 1;
+    }
+    .beforelogin-action .zest-login-btn:hover {
+      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(67,206,162,0.18);
+    }
+    @media (max-width: 900px) {
+      .beforelogin-main {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: stretch;
+      }
+      .beforelogin-info, .beforelogin-action {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="beforelogin-main">
+    <!-- Left: Info -->
+    <div class="beforelogin-info">
+      <div class="beforelogin-title">ZEST2k25 Admin Panel</div>
+      <div style="font-size: 1.13rem; color: #f4f4f4; margin-bottom: 2.2rem; line-height: 1.8;">
+        <span style="color:#43cea2; font-weight:600;">ZEST2k25</span> is the annual flagship event, bringing together 
+        <b>innovation</b>, <b>technology</b>, and <b>creativity</b>.<br><br>
+        Admins can manage users, events, and all aspects of the fest from this secure panel.<br><br>
+        Log in to access the full suite of admin features and start managing ZEST2k25.
+      </div>
+      <div class="zest-section"><i class="fas fa-user-shield"></i> <b>Admin Panel:</b> Secure, role-based access for managing users, roles, and event operations.</div>
+      <div class="zest-section"><i class="fas fa-calendar-alt"></i> <b>Event Management:</b> Add, update, and monitor all ZEST2k25 events in real time.</div>
+      <div class="zest-section"><i class="fas fa-users"></i> <b>Team Collaboration:</b> Multiple admins and managers can collaborate efficiently.</div>
+      <div class="zest-section"><i class="fas fa-shield-alt"></i> <b>Security:</b> IP restrictions, encrypted passwords, and JWT authentication for maximum safety.</div>
+    </div>
+    <!-- Right: Login Button -->
+    <div class="beforelogin-action">
+      <div class="beforelogin-title">Admin Login</div>
+      <a href="/login"><button class="zest-login-btn"><i class="fas fa-sign-in-alt"></i> Go to Admin Login</button></a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Events</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/admin-common.css" />
+</head>
+<body>
+      <div style="width:100%;position:fixed;top:0;left:0;z-index:100;">
+      <%- include("adminHeader", { username: typeof username !== 'undefined' ? username : null }); %>
+    </div>
+    <div style="margin-top:80px; display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; width: 100%; max-width: 1100px;">
+      <!-- Left: Add Event Form -->
+      <div class="admin-section" style="margin-top:0; min-width: 340px; flex: 1;">
+        <h1>Manage Events</h1>
+        <form action="/addEvents" method="POST" class="register-role-form">
+          <div class="input-group">
+            <label for="event">Event Name</label>
+            <input type="text" id="event" name="event" placeholder="Enter event name" required />
+          </div>
+          <div class="input-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" placeholder="Enter description" />
+          </div>
+          <div class="input-group">
+            <label for="type">Type</label>
+            <input type="text" id="type" name="type" placeholder="Enter type" required />
+          </div>
+          <div class="input-group">
+            <label for="venue">Venue</label>
+            <input type="text" id="venue" name="venue" placeholder="Enter venue" />
+          </div>
+          <div class="input-group">
+            <label for="time">Time</label>
+            <input type="text" id="time" name="time" placeholder="Enter time" />
+          </div>
+          <div class="input-group">
+            <label for="limit">Limit</label>
+            <input type="number" id="limit" name="limit" placeholder="Enter limit" />
+          </div>
+          <button class="register-btn" type="submit">Add Event</button>
+        </form>
+      </div>
+      <!-- Right: Event List -->
+      <div class="admin-section" style="background:rgba(30,34,54,0.98); min-width:340px; flex:1; max-width:420px;">
+        <div style="font-size:1.4rem; font-weight:600; color:#43cea2; margin-bottom:1.2rem; text-align:center;">Events List</div>
+        <% if (typeof events !== 'undefined' && events.length > 0) { %>
+          <table style="width:100%; border-collapse:collapse;">
+            <thead>
+              <tr style="background:#232946; color:#ffb347;">
+                <th style="padding:0.6rem 0.3rem; font-size:1rem;">Event</th>
+                <th style="padding:0.6rem 0.3rem; font-size:1rem;">Type</th>
+                <th style="padding:0.6rem 0.3rem; font-size:1rem;">Venue</th>
+                <th style="padding:0.6rem 0.3rem; font-size:1rem;">Time</th>
+                <th style="padding:0.6rem 0.3rem; font-size:1rem;">Limit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% events.forEach(function(ev) { %>
+                <tr style="border-bottom:1px solid #232946;">
+                  <td style="padding:0.5rem 0.3rem; color:#fff; font-size:1rem;"><%= ev.event %></td>
+                  <td style="padding:0.5rem 0.3rem; color:#ffb347; font-size:1rem;"><%= ev.type %></td>
+                  <td style="padding:0.5rem 0.3rem; color:#fff; font-size:1rem;"><%= ev.venue %></td>
+                  <td style="padding:0.5rem 0.3rem; color:#fff; font-size:1rem;"><%= ev.time %></td>
+                  <td style="padding:0.5rem 0.3rem; color:#fff; font-size:1rem;"><%= ev.limit %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        <% } else { %>
+          <div style="color:#ffb347; text-align:center; margin-top:1.5rem;">No events added yet.</div>
+        <% } %>
+      </div>
+    </div>
+</body>
+</html>

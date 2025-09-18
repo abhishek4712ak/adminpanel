@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Admin Login</title>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background: linear-gradient(135deg, #181c2f 0%, #232946 100%);
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: 'Roboto', sans-serif;
+			margin: 0;
+		}
+		.login-container {
+			background: rgba(30, 34, 54, 0.98);
+			padding: 2.5rem 2rem 2rem 2rem;
+			border-radius: 18px;
+			box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+			width: 100%;
+			max-width: 370px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.login-header {
+			font-size: 2rem;
+			font-weight: 700;
+			margin-bottom: 1.5rem;
+			letter-spacing: 1px;
+			background: linear-gradient(90deg, #ff512f 0%, #ffb347 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			text-align: center;
+		}
+		.login-form {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 1.2rem;
+		}
+		.input-group {
+			display: flex;
+			flex-direction: column;
+			gap: 0.3rem;
+		}
+		label {
+			font-size: 1rem;
+			color: #43cea2;
+			font-weight: 500;
+		}
+		input[type="text"],
+		input[type="password"] {
+			padding: 0.7rem 1rem;
+			border: 1px solid #bfc9d9;
+			border-radius: 8px;
+			font-size: 1rem;
+			background: #232946;
+			color: #fff;
+			transition: border 0.2s;
+		}
+		input[type="text"]:focus,
+		input[type="password"]:focus {
+			border: 1.5px solid #ffb347;
+			outline: none;
+		}
+		.login-btn {
+			background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			padding: 0.8rem 0;
+			font-size: 1.1rem;
+			font-weight: 700;
+			cursor: pointer;
+			margin-top: 0.5rem;
+			transition: background 0.2s;
+		}
+		.login-btn:hover {
+			background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+		}
+		.login-footer {
+			margin-top: 1.5rem;
+			font-size: 0.95rem;
+			color: #7a869a;
+			text-align: center;
+		}
+		.toggle-text {
+			color: #43cea2;
+			cursor: pointer;
+			text-decoration: underline;
+		}
+		@media (max-width: 480px) {
+			.login-container {
+				padding: 1.5rem 0.5rem;
+			}
+			.login-header {
+				font-size: 1.5rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="login-container">
+		<div class="login-header" id="form-title">Admin Login</div>
+
+		<!-- Login Form -->
+		<form class="login-form" id="login-form" action="/login" method="POST">
+			<% if (message && message.length > 0) { %>
+				<div style="color: #ff6b6b; text-align: center; margin-bottom: 1rem;"><%= message %></div>
+			<% } %>
+			<div class="input-group">
+				<label for="username">Username</label>
+				<input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="username">
+			</div>
+			<div class="input-group">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+			</div>
+			<button class="login-btn" type="submit">Login</button>
+			<div style="text-align:center; margin-top:1rem;">
+				<span class="toggle-text" onclick="showSignup()">Don't have an account? Sign up</span>
+			</div>
+		</form>
+
+		<!-- Signup Form -->
+		<form class="login-form" id="signup-form" action="/signup" method="POST" style="display: none;">
+			<div class="input-group">
+				<label for="signup-username">Username</label>
+				<input type="text" id="signup-username" name="username" placeholder="Choose a username" required autocomplete="username">
+			</div>
+			<div class="input-group">
+				<label for="signup-password">Password</label>
+				<input type="password" id="signup-password" name="password" placeholder="Create a password" required autocomplete="new-password">
+			</div>
+			<div class="input-group">
+				<label for="signup-role">Role</label>
+				<input type="text" id="signup-role" name="role" placeholder="Role (default: admin)">
+			</div>
+			<button class="login-btn" type="submit">Sign Up</button>
+			<div style="text-align:center; margin-top:1rem;">
+				<span class="toggle-text" onclick="showLogin()">Already have an account? Login</span>
+			</div>
+		</form>
+
+		<div class="login-footer">
+			&copy; <%= new Date().getFullYear() %> Admin Panel. All rights reserved.
+		</div>
+	</div>
+
+	<script>
+		function showSignup() {
+			document.getElementById('login-form').style.display = 'none';
+			document.getElementById('signup-form').style.display = 'flex';
+			document.getElementById('form-title').innerText = 'Admin Signup';
+		}
+		function showLogin() {
+			document.getElementById('signup-form').style.display = 'none';
+			document.getElementById('login-form').style.display = 'flex';
+			document.getElementById('form-title').innerText = 'Admin Login';
+		}
+	</script>
+</body>
+</html>

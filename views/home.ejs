@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/04fd96b6f4.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      color: #f4f4f4;
+      background: linear-gradient(135deg, #181c2f 0%, #232946 100%);
+      background-image:
+        radial-gradient(circle at 20% 80%, #ff512f 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, #43cea2 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, #ffb347 0%, transparent 70%);
+      background-blend-mode: screen, overlay, normal;
+      overflow-x: hidden;
+    }
+
+    .dashboard-container {
+      max-width: 950px;
+      margin: 2.5rem auto 0 auto;
+      background: rgba(30, 34, 54, 0.98);
+      border-radius: 22px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      padding: 2.5rem 2rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-container::before,
+    .dashboard-container::after {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      opacity: 0.18;
+      border-radius: 50%;
+      filter: blur(8px);
+      z-index: 0;
+    }
+
+    .dashboard-container::before {
+      top: -60px;
+      left: -60px;
+      background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%);
+    }
+
+    .dashboard-container::after {
+      bottom: -60px;
+      right: -60px;
+      background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    }
+
+    .admin-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      z-index: 1;
+      background: linear-gradient(90deg, #232946 0%, #181c2f 100%);
+      border-radius: 14px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 2px 12px rgba(67, 206, 162, 0.10);
+    }
+
+    .admin-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.7rem;
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(255, 81, 47, 0.12);
+      z-index: 1;
+      animation: avatarGlow 2.5s infinite alternate;
+      border: 3px solid #43cea2;
+    }
+
+    @keyframes avatarGlow {
+      0% { box-shadow: 0 2px 12px rgba(255,81,47,0.12); }
+      100% { box-shadow: 0 0 32px 8px rgba(255,81,47,0.25); }
+    }
+
+    .admin-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 1;
+    }
+
+    .admin-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffb347;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #23294699;
+    }
+
+    .admin-role {
+      font-size: 1.1rem;
+      color: #43cea2;
+      font-weight: 500;
+    }
+
+    .admin-desc {
+      font-size: 0.95rem;
+      color: #bfc9d9;
+    }
+
+    .dashboard-title {
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: #fff;
+      letter-spacing: 1px;
+      text-align: center;
+      z-index: 1;
+      text-shadow: 0 2px 8px #23294699;
+    }
+
+    .dashboard-functions {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      z-index: 1;
+    }
+
+    .function-card {
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      padding: 1.3rem 1.2rem;
+      min-width: 220px;
+      max-width: 270px;
+      flex: 1 1 220px;
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.7rem;
+      border: 1.5px solid #232946;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .function-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(255,179,71,0.13);
+      border-color: #ffb347;
+      background: linear-gradient(135deg, #ff512f 0%, #43cea2 100%);
+    }
+
+    .function-card i {
+      font-size: 1.5rem;
+      color: #ffb347;
+      filter: drop-shadow(0 2px 8px #23294699);
+    }
+
+    .function-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 2px 8px #23294699;
+    }
+
+    .function-desc {
+      font-size: 0.98rem;
+      color: #bfc9d9;
+    }
+
+    .home-footer {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: #7a869a;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-container {
+        padding: 1.2rem 0.3rem;
+      }
+      .dashboard-title {
+        font-size: 1.3rem;
+      }
+      .admin-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+      .dashboard-functions {
+        gap: 0.7rem;
+      }
+      .function-card {
+        min-width: 160px;
+        padding: 1rem 0.7rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .dashboard-container {
+        margin: 1rem 0 0 0;
+      }
+      .admin-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.7rem;
+      }
+      .function-card {
+        min-width: 120px;
+        padding: 0.7rem 0.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include("adminHeader", { username: typeof username !== 'undefined' ? username : null }); %>
+
+  <div class="dashboard-container">
+    <div class="admin-info">
+      <div class="admin-avatar">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <div class="admin-details">
+        <div class="admin-name"><%= typeof username !== 'undefined' && username ? username : 'Admin' %></div>
+        <div class="admin-role">Super Administrator</div>
+        <div class="admin-desc">Welcome to your dashboard! Here you can manage users, events, IPs, and more.</div>
+      </div>
+    </div>
+
+    <div class="dashboard-title">Admin Functions &amp; Quick Actions</div>
+
+    <div class="dashboard-functions">
+      <a href="/register-role" class="function-card">
+        <i class="fas fa-user-plus"></i>
+        <div class="function-title">Register Roles</div>
+        <div class="function-desc">Add new admin or user roles to the system securely.</div>
+      </a>
+      <a href="/tyro" class="function-card">
+        <i class="fas fa-cogs"></i>
+        <div class="function-title">Manage Tyro</div>
+        <div class="function-desc">Configure and update Tyro settings and permissions.</div>
+      </a>
+      <a href="/addEvents" class="function-card">
+        <i class="far fa-calendar-alt"></i>
+        <div class="function-title">Manage Events</div>
+        <div class="function-desc">Create, edit, and delete events for your organization.</div>
+      </a>
+      <a href="/addip" class="function-card">
+        <i class="fa-solid fa-laptop"></i>
+        <div class="function-title">Allowed IPs</div>
+        <div class="function-desc">Control which IP addresses can access the admin panel.</div>
+      </a>
+      <a href="/halt" class="function-card">
+        <i class="fa-solid fa-stop-circle"></i>
+        <div class="function-title">Halt Registration</div>
+        <div class="function-desc">Temporarily stop new registrations with a single click.</div>
+      </a>
+    </div>
+
+    <div class="home-footer">
+      &copy; <%= new Date().getFullYear() %> ZEST2k25 Admin Panel
+    </div>
+  </div>
+</body>
+</html>

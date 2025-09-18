@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Tyro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/admin-common.css" />
+</head>
+<body>
+       <div style="width:100%;position:fixed;top:0;left:0;z-index:100;">
+      <%- include("adminHeader", { username: typeof username !== 'undefined' ? username : null }); %>
+    </div>
+    <div style="margin-top:80px; display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; width: 100%; max-width: 1100px;">
+      <!-- Left: Tyro Config Form -->
+      <div class="admin-section" style="margin-top:0; min-width: 340px; flex: 1;">
+        <h1>Manage Tyro</h1>
+        <form action="/tyro" method="POST" class="register-role-form">
+          <div class="input-group">
+            <label for="setting">Setting</label>
+            <input type="text" id="setting" name="setting" placeholder="Enter Tyro setting" required />
+          </div>
+          <button class="register-btn" type="submit">Update Tyro</button>
+        </form>
+      </div>
+      <!-- Right: Tyro Settings List -->
+      <div class="admin-section" style="background:rgba(30,34,54,0.98); min-width:340px; flex:1; max-width:420px;">
+        <div style="font-size:1.4rem; font-weight:600; color:#43cea2; margin-bottom:1.2rem; text-align:center;">Tyro Settings</div>
+        <!-- Placeholder for tyro settings list -->
+        <div style="color:#ffb347; text-align:center; margin-top:1.5rem;">No settings configured yet.</div>
+      </div>
+    </div>
+</body>
+</html>

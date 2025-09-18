@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Not allowed</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+        <style>
+            body {
+                min-height: 100vh;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(120deg, #232946 0%, #181c2f 100%);
+                font-family: 'Poppins', sans-serif;
+                color: #fff;
+            }
+            .restricted-container {
+                background: rgba(35, 41, 70, 0.95);
+                border-radius: 18px;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+                padding: 2.5rem 3.5rem;
+                text-align: center;
+                border: 2px solid #ff512f;
+            }
+            .restricted-container h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+                color: #ff512f;
+                letter-spacing: 1px;
+            }
+            .restricted-container h3 {
+                font-size: 1.2rem;
+                color: #fff;
+                margin-bottom: 0;
+            }
+            @media (max-width: 600px) {
+                .restricted-container {
+                    padding: 1.2rem 0.7rem;
+                }
+                .restricted-container h1 {
+                    font-size: 1.5rem;
+                }
+            }
+        </style>
+</head>
+<body>
+        <div class="restricted-container">
+            <h1>IP not allowed!</h1>
+            <h3>Contact Administrator.</h3>
+            
+        </div>
+</body>
+</html>
