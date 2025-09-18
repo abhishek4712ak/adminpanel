@@ -123,30 +123,8 @@
 				<input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
 			</div>
 			<button class="login-btn" type="submit">Login</button>
-			<div style="text-align:center; margin-top:1rem;">
-				<span class="toggle-text" onclick="showSignup()">Don't have an account? Sign up</span>
-			</div>
 		</form>
 
-		<!-- Signup Form -->
-		<form class="login-form" id="signup-form" action="/signup" method="POST" style="display: none;">
-			<div class="input-group">
-				<label for="signup-username">Username</label>
-				<input type="text" id="signup-username" name="username" placeholder="Choose a username" required autocomplete="username">
-			</div>
-			<div class="input-group">
-				<label for="signup-password">Password</label>
-				<input type="password" id="signup-password" name="password" placeholder="Create a password" required autocomplete="new-password">
-			</div>
-			<div class="input-group">
-				<label for="signup-role">Role</label>
-				<input type="text" id="signup-role" name="role" placeholder="Role (default: admin)">
-			</div>
-			<button class="login-btn" type="submit">Sign Up</button>
-			<div style="text-align:center; margin-top:1rem;">
-				<span class="toggle-text" onclick="showLogin()">Already have an account? Login</span>
-			</div>
-		</form>
 
 		<div class="login-footer">
 			&copy; <%= new Date().getFullYear() %> Admin Panel. All rights reserved.
