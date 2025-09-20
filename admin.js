@@ -41,8 +41,3 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`Visit at ${address}:${PORT}`);
 });
-
-import bcrypt from "bcryptjs";
-const salt = await bcrypt.genSalt(10);
-const hashedPassword = await bcrypt.hash("abhishek123", salt);
-console.log(hashedPassword);
