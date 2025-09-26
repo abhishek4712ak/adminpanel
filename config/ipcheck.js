@@ -11,7 +11,7 @@ const getIp = async (req, res) => {
 
 const allowedIps = getIp;
 
-const allowed = ["127.0.0.1","192.168.56.1"];
+const allowed = ["127.0.0.1"];
 
 allowedIps((data) => {
   data.forEach((elem) => {
