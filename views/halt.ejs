@@ -50,23 +50,48 @@
        <div style="width:100%;position:fixed;top:0;left:0;z-index:100;">
       <%- include("adminHeader", { username: typeof username !== 'undefined' ? username : null }); %>
     </div>
-        <div style="margin-top:80px; display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; width: 100%; max-width: 1100px;">
-      <!-- Left: Halt Registration Form -->
+    <div style="margin-top:80px; display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; width: 100%; max-width: 1100px;">
+      <!-- Active Events Section -->
       <div class="admin-section" style="margin-top:0; min-width: 340px; flex: 1;">
-        <h1>Halt Registration</h1>
-        <form action="/halt" method="POST" class="register-role-form">
-          <div class="input-group">
-            <label for="halt">Halt Status (0=Active, 1=Halted)</label>
-            <input type="number" id="halt" name="halt" min="0" max="1" required />
+        <h1>Active Events</h1>
+        <% if (typeof events !== 'undefined' && events.filter(ev => ev.halt === 0).length > 0) { %>
+          <div style="max-height: 400px; overflow-y: auto;">
+            <% events.filter(ev => ev.halt === 0).forEach(function(ev) { %>
+              <div style="background: rgba(35, 41, 70, 0.8); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #43cea2;">
+                <div style="font-size: 1.2rem; font-weight: 600; color: #ffb347; margin-bottom: 0.5rem;"><%= ev.event %></div>
+                <div style="color: #fff; margin-bottom: 0.5rem;">Type: <%= ev.type %> | Venue: <%= ev.venue %> | Time: <%= ev.time %></div>
+                <form action="/halt/<%= ev._id %>" method="POST" style="display: inline;">
+                  <button type="submit" style="background: #ff512f; border: none; color: #fff; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-size: 1rem;">
+                    Halt
+                  </button>
+                </form>
+              </div>
+            <% }); %>
           </div>
-          <button class="register-btn" type="submit">Set Status</button>
-        </form>
+        <% } else { %>
+          <div style="color:#ffb347; text-align:center; margin-top:1.5rem;">No active events.</div>
+        <% } %>
       </div>
-      <!-- Right: Current Status -->
+      <!-- Halted Events Section -->
       <div class="admin-section" style="background:rgba(30,34,54,0.98); min-width:340px; flex:1; max-width:420px;">
-        <div style="font-size:1.4rem; font-weight:600; color:#43cea2; margin-bottom:1.2rem; text-align:center;">Current Registration Status</div>
-        <!-- Placeholder for status -->
-        <div style="color:#ffb347; text-align:center; margin-top:1.5rem;">Status: Active</div>
+        <h1>Halted Events</h1>
+        <% if (typeof events !== 'undefined' && events.filter(ev => ev.halt === 1).length > 0) { %>
+          <div style="max-height: 400px; overflow-y: auto;">
+            <% events.filter(ev => ev.halt === 1).forEach(function(ev) { %>
+              <div style="background: rgba(35, 41, 70, 0.8); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ff512f;">
+                <div style="font-size: 1.2rem; font-weight: 600; color: #ffb347; margin-bottom: 0.5rem;"><%= ev.event %></div>
+                <div style="color: #fff; margin-bottom: 0.5rem;">Type: <%= ev.type %> | Venue: <%= ev.venue %> | Time: <%= ev.time %></div>
+                <form action="/halt/<%= ev._id %>" method="POST" style="display: inline;">
+                  <button type="submit" style="background: #43cea2; border: none; color: #fff; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-size: 1rem;">
+                    Resume
+                  </button>
+                </form>
+              </div>
+            <% }); %>
+          </div>
+        <% } else { %>
+          <div style="color:#ffb347; text-align:center; margin-top:1.5rem;">No halted events.</div>
+        <% } %>
       </div>
     </div>
 </body>
