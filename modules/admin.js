@@ -72,7 +72,7 @@ router.post('/update-user/:id', verifyAdmin, async (req, res) => {
 
 // GET /tyro (only for admin)
 router.get("/tyro", verifyAdmin, (req, res) => {
-  console.log("/tyro accessed by:", req.user);
+  console.log("/tyro accessed by:", req.user.username);
   const username = req.user && req.user.username ? req.user.username : null;
   res.render("tyro", { username });
 });
@@ -82,7 +82,7 @@ import eventModel from "../models/event.js";
 
 // GET /addEvents (only for admin)
 router.get("/addEvents", verifyAdmin, async (req, res) => {
-  console.log("/addEvents accessed by:", req.user);
+  console.log("/addEvents accessed by:", req.user.username);
   const username = req.user && req.user.username ? req.user.username : null;
   let events = [];
   try {
@@ -116,7 +116,7 @@ router.post("/addEvents", verifyAdmin, async (req, res) => {
 // GET /addip (only for admin)
 
 router.get("/addip", verifyAdmin, async (req, res) => {
-  console.log("/addip accessed by:", req.user);
+  console.log("/addip accessed by:", req.user.username);
   const username = req.user && req.user.username ? req.user.username : null;
   let ips = [];
   let message = req.query.message || null;
@@ -157,10 +157,36 @@ router.post("/addip/remove/:id", verifyAdmin, async (req, res) => {
 });
 
 // GET /halt (only for admin)
-router.get("/halt", verifyAdmin, (req, res) => {
+router.get("/halt", verifyAdmin, async (req, res) => {
   console.log("/halt accessed by:", req.user);
   const username = req.user && req.user.username ? req.user.username : null;
-  res.render("halt", { username });
+  let events = [];
+  try {
+    events = await eventModel.find({});
+  } catch (err) {
+    console.error("Error fetching events:", err);
+  }
+  res.render("halt", { username, events });
+});
+
+// POST /halt/:id (only for admin) - Toggle halt status for individual event
+router.post("/halt/:id", verifyAdmin, async (req, res) => {
+  const eventId = req.params.id;
+  const username = req.user && req.user.username ? req.user.username : null;
+  try {
+    const event = await eventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).send("Event not found");
+    }
+    // Toggle halt: if 0 (active), set to 1 (halted); if 1, set to 0
+    event.halt = event.halt === 0 ? 1 : 0;
+    await event.save();
+    console.log(`Event ${event.event} halt status toggled to ${event.halt}`);
+  } catch (err) {
+    console.error("Error toggling halt status:", err);
+  }
+  // Redirect back to /halt to show updated list
+  res.redirect("/halt");
 });
 
 
