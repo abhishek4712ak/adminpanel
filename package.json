@@ -4,6 +4,7 @@
   "main": "admin.js",
   "type": "module",
   "scripts": {
+    "build":"npm install"
     "dev": "nodemon admin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
