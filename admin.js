@@ -24,7 +24,7 @@ app.use(restrictedIP); // Apply the IP restriction middleware globally
 
 
 app.get("/", (req, res) => {
-  res.render("beforeLogin");
+  res.render("login");
 });
 
 app.get("/",isAdminLoggedIn, (req, res) => {
