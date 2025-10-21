@@ -14,7 +14,7 @@ router.use(express.urlencoded({ extended: true }));
 
 // Before Login page
 router.get("/beforelogin", (req, res) => {
-    res.render("beforeLogin", { username: null });
+    res.render("login", { username: null });
 });
 
 // Admin Panel Home Route
